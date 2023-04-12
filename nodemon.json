@@ -1,0 +1,10 @@
+{
+  "watch": [
+    ".env",
+    "config",
+    "node_modules",
+    "nodemon.json",
+    "package.json",
+    "src"
+  ]
+}
