@@ -1,34 +1,7 @@
-# microservice-template
+# BerlinClock_JulianOstmo
 
-## How to use this template project
-
-1. Create a new repo using Github CLI and this template: <br>
-   ```bash
-   gh repo create github.ibm.com/<org-name>/<repo-name> --public --confirm --template="github.ibm.com/cio-london/microservice-template"
-   ```
-2. Open the `package.json` and update the `name`, `description` and `repository.url`
-3. Open `scripts/build-and-save.sh` and update `APP_NAME`
-4. Open `scripts/config/global.sh` and update the container registry namespaces: `REGISTRY_TAGS_AND_NAMESPACES`
-5. Open `.travis.yml` and update `replace-with-branches` with `dev, main`
-6. Encrypt the IBM Cloud API Key, DockerHub username and password in Travis <br>
-   ```bash
-   travis encrypt SECURE_IBMCLOUD_APIKEY="replace-with-api-key" -r org-name/repo-name
-   travis encrypt DOCKERHUB_USERNAME="replace-with-username" -r org-name/repo-name
-   travis encrypt DOCKERHUB_PASSWORD="replace-with-password" -r org-name/repo-name
-   ```
-7. Update the `env.global.secure` values (replace the `TODO`) with the output of each `travis encrypt` command
-8. In the project, run: <br>
-   ```bash
-   nvm install
-   npm i
-   ```
-9. Update `{ project-name }` and `{ project-description }` in this README, and remove everything above `{ project-name }`
-10. Commit all changes and push them to the `main` branch
-11. Follow project setup below
-
-# { project-name }
-
-{ project-description }
+BerlinClock kata (Blue belt practice)
+https://www.codewars.com/kata/5a1463678ba9145a670000f9
 
 To get started, in short:
 Run `npm ci` and then `npm start`.

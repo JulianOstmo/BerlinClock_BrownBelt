@@ -1,7 +1,7 @@
 {
-  "name": "microservice-template",
+  "name": "berlinclock_julianostmo",
   "version": "1.0.0",
-  "description": "Microservice project template repository",
+  "description": "BerlinClock kata (Blue belt practice)",
   "main": "index.js",
   "dependencies": {
     "axios": "^0.21.1",
@@ -37,10 +37,10 @@
     "supertest": "^6.1.3"
   },
   "scripts": {
-    "detect-secrets": "cross-env-shell docker run --rm -v ${INIT_CWD}:/code ibmcom/detect-secrets-hook:latest --baseline .secrets.baseline",
-    "detect-secrets:audit": "cross-env-shell docker run -it --rm -v ${INIT_CWD}:/code ibmcom/detect-secrets:latest audit .secrets.baseline",
-    "detect-secrets:exclude": "cross-env-shell docker run --rm -v ${INIT_CWD}:/code ibmcom/detect-secrets:latest scan --update .secrets.baseline --exclude-files",
-    "detect-secrets:update-baseline": "cross-env-shell docker run --rm -v ${INIT_CWD}:/code ibmcom/detect-secrets:latest scan --update .secrets.baseline",
+    "detect-secrets": "cross-env-shell docker run --platform linux/amd64 --rm -v ${INIT_CWD}:/code icr.io/git-defenders/detect-secrets-hook:0.13.1.ibm.56.dss --baseline .secrets.baseline",
+    "detect-secrets:audit": "cross-env-shell docker run --platform linux/amd64 -it --rm -v ${INIT_CWD}:/code icr.io/git-defenders/detect-secrets:0.13.1.ibm.56.dss audit .secrets.baseline",
+    "detect-secrets:exclude": "cross-env-shell docker run --platform linux/amd64 --rm -v ${INIT_CWD}:/code icr.io/git-defenders/detect-secrets:0.13.1.ibm.56.dss scan --update .secrets.baseline --exclude-files",
+    "detect-secrets:update-baseline": "cross-env-shell docker run --platform linux/amd64 --rm -v ${INIT_CWD}:/code icr.io/git-defenders/detect-secrets:0.13.1.ibm.56.dss scan --update .secrets.baseline",
     "lint": "eslint .",
     "pre-commit": "lint-staged",
     "prepare": "husky install",
@@ -50,14 +50,14 @@
     "start:dev": "cross-env NODE_ENV=development nodemon index",
     "test": "cross-env NODE_ENV=test npm run lint && npm run test:coverage",
     "test:coverage": "cross-env NODE_ENV=test jest ./tests --collectCoverage",
-    "test:integration": "cross-env NODE_ENV=test jest ./tests/integration",
-    "test:integration:watch": "cross-env NODE_ENV=test npm run test:integration -- --watch",
+    "test:bdd": "cross-env NODE_ENV=test jest ./tests/integration",
+    "test:bdd:watch": "cross-env NODE_ENV=test npm run test:bdd -- --watch",
     "test:unit": "cross-env NODE_ENV=test jest ./tests/unit",
     "test:unit:watch": "cross-env NODE_ENV=test npm run test:unit -- --watch"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.ibm.com/cio-london/microservice-template.git"
+    "url": "https://github.ibm.com/xpfarm/BerlinClock_JulianOstmo.git"
   },
   "lint-staged": {
     "**/*.{css,html,js,json,md,page,xml,yaml,yml}": [
