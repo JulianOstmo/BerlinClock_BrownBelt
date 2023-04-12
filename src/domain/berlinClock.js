@@ -1,7 +1,11 @@
+/* eslint-disable class-methods-use-this */
 class BerlinClock {
-  // eslint-disable-next-line class-methods-use-this
   getSeconds() {
     return 'O';
+  }
+
+  getTopRow() {
+    return 'OOOO';
   }
 }
 

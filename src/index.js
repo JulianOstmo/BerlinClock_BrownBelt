@@ -10,6 +10,7 @@ app.get('/time', (req, res) => {
 
   const time = {
     seconds: berlinClock.getSeconds(),
+    topRow: berlinClock.getTopRow(),
   };
 
   res.status(200).send(time);
