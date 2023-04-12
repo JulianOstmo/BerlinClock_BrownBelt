@@ -1,0 +1,2 @@
+- BerlinClock doesn't currently use its input parameter
+- eslint disable in BerlinClock.getSeconds()
