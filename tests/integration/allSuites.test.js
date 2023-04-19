@@ -64,5 +64,20 @@ describe('GIVEN the API endpoint "/time"', () => {
           );
         });
     });
+
+    test('THEN the fourth row (one minute) is "OOOO"', async () => {
+      await request(app)
+        .get(`/time`)
+        .set({
+          Accept: 'application/json',
+        })
+        .send(input)
+        .expect(200)
+        .then((response) => {
+          expect(response.body).toEqual(
+            expect.objectContaining({ fourthRow: 'OOOO' }),
+          );
+        });
+    });
   });
 });

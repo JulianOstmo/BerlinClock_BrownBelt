@@ -13,6 +13,7 @@ app.get('/time', (req, res) => {
     topRow: berlinClock.getTopRow(),
     secondRow: berlinClock.getSecondRow(),
     thirdRow: berlinClock.getThirdRow(),
+    fourthRow: berlinClock.getFourthRow(),
   };
 
   res.status(200).send(time);
