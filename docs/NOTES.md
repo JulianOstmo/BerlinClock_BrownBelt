@@ -25,4 +25,4 @@
 - Write UAT 1.5 - Forth row is "OOOO" ✅
 - Write BDD test for UAT 1.5 ✅
 - Write Unit test for UAT 1.5 ✅
-- Scenario 1 refactor
+- Scenario 1 refactor ✅

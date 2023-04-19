@@ -1,2 +1,4 @@
 - BerlinClock doesn't currently use its input parameter
 - eslint disable in BerlinClock
+- use jest-cucumber-fusion and feature file for BDD tests
+- need an E2E test to check for a 200 response status when hitting `/time`
