@@ -26,3 +26,11 @@
 - Write BDD test for UAT 1.5 ✅
 - Write Unit test for UAT 1.5 ✅
 - Scenario 1 refactor ✅
+
+## Pomodoro 4
+
+- add jest-cucumber-fusion ✅
+
+## Pomodoro 5
+
+- move BDD tests into feature and steps files ✅
