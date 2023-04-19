@@ -16,5 +16,10 @@ describe('GIVEN the BerlinClock class', () => {
       const berlinClock = new BerlinClock('OO:OO:OO');
       expect(berlinClock.getSecondRow()).toEqual('OOOO');
     });
+
+    test('THEN getSecondRow should return "O"', () => {
+      const berlinClock = new BerlinClock('OO:OO:OO');
+      expect(berlinClock.getThirdRow()).toEqual('OOOOOOOOOOO');
+    });
   });
 });

@@ -19,3 +19,9 @@ THEN the top row (five hours) is "OOOO"
 GIVEN the API endpoint /time
 WHEN I request the time for 00:00:00
 THEN the second row (single hours) is "OOOO"
+
+### UAT 1.4 - Third row is "OOOOOOOOOOO" ✅
+
+GIVEN the API endpoint /time
+WHEN I request the time for 00:00:00
+THEN the third row (five minutes) is "OOOOOOOOOOO"

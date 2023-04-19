@@ -49,5 +49,20 @@ describe('GIVEN the API endpoint "/time"', () => {
           );
         });
     });
+
+    test('THEN the third row (five minutes) is "OOOOOOOOOOO"', async () => {
+      await request(app)
+        .get(`/time`)
+        .set({
+          Accept: 'application/json',
+        })
+        .send(input)
+        .expect(200)
+        .then((response) => {
+          expect(response.body).toEqual(
+            expect.objectContaining({ thirdRow: 'OOOOOOOOOOO' }),
+          );
+        });
+    });
   });
 });

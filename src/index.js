@@ -12,6 +12,7 @@ app.get('/time', (req, res) => {
     seconds: berlinClock.getSeconds(),
     topRow: berlinClock.getTopRow(),
     secondRow: berlinClock.getSecondRow(),
+    thirdRow: berlinClock.getThirdRow(),
   };
 
   res.status(200).send(time);
