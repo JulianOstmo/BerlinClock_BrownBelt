@@ -7,6 +7,10 @@ class BerlinClock {
   getTopRow() {
     return 'OOOO';
   }
+
+  getSecondRow() {
+    return 'OOOO';
+  }
 }
 
 module.exports = BerlinClock;

@@ -11,6 +11,7 @@ app.get('/time', (req, res) => {
   const time = {
     seconds: berlinClock.getSeconds(),
     topRow: berlinClock.getTopRow(),
+    secondRow: berlinClock.getSecondRow(),
   };
 
   res.status(200).send(time);
