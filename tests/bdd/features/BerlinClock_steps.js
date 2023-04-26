@@ -15,43 +15,45 @@ Given('the BerlinClock API app', () => {
   berlinClock = request(app);
 });
 
-When('I send "00:00:00" to the /time route', async () => {
+When(/^I send (.*) to the time route$/, async (time) => {
   response = await berlinClock
     .get(`/time`)
     .set({
       Accept: 'application/json',
     })
-    .send('00:00:00');
+    .send(time);
 });
 
-Then('the response should include seconds set to "O"', () => {
-  expect(response.body).toEqual(expect.objectContaining({ seconds: 'O' }));
-});
-
-Then('the response should include topRow (five hours) set to "OOOO"', () => {
-  expect(response.body).toEqual(expect.objectContaining({ topRow: 'OOOO' }));
+Then(/^the response should include seconds set to (.*)$/, (seconds) => {
+  expect(response.body).toEqual(expect.objectContaining({ seconds }));
 });
 
 Then(
-  'the response should include secondRow (single hours) set to "OOOO"',
-  () => {
-    expect(response.body).toEqual(
-      expect.objectContaining({ secondRow: 'OOOO' }),
-    );
+  /^the response should include topRow \(five hours\) set to (.*)$/,
+  (arg0) => {
+    expect(response.body).toEqual(expect.objectContaining({ topRow: arg0 }));
   },
 );
 
 Then(
-  'the response should include thirdRow (five minutes) set to "OOOOOOOOOOO"',
-  () => {
-    expect(response.body).toEqual(
-      expect.objectContaining({ thirdRow: 'OOOOOOOOOOO' }),
-    );
+  /^the response should include secondRow \(single hours\) set to (.*)$/,
+  (secondRow) => {
+    expect(response.body).toEqual(expect.objectContaining({ secondRow }));
   },
 );
 
-Then('the response should include fourthRow (one minute) set to "OOOO"', () => {
-  expect(response.body).toEqual(expect.objectContaining({ fourthRow: 'OOOO' }));
-});
+Then(
+  /^the response should include thirdRow \(five minutes\) set to (.*)$/,
+  (thirdRow) => {
+    expect(response.body).toEqual(expect.objectContaining({ thirdRow }));
+  },
+);
+
+Then(
+  /^the response should include fourthRow \(one minute\) set to (.*)$/,
+  (fourthRow) => {
+    expect(response.body).toEqual(expect.objectContaining({ fourthRow }));
+  },
+);
 
 Fusion('BerlinClock.feature');

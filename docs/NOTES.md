@@ -34,3 +34,8 @@
 ## Pomodoro 5
 
 - move BDD tests into feature and steps files ✅
+
+## Pomodoro 6
+
+- Rework UATs to use Examples ✅
+- Refactor BerlinClock.feature file to use Examples ✅
