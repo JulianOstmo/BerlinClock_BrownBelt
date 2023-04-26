@@ -3,31 +3,36 @@ const BerlinClock = require('../../../src/domain/berlinClock');
 describe('GIVEN the BerlinClock class', () => {
   let berlinClock;
 
-  describe('WHEN it is initialised with "OO:OO:OO"', () => {
-    const input = 'OO:OO:OO';
+  describe.each`
+    time          | seconds | topRow    | secondRow | thirdRow         | fourthRow
+    ${'00:00:00'} | ${'O'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'OOOO'}
+    ${'00:00:01'} | ${'Y'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'OOOO'}
+  `(
+    'WHEN it is initialised with $time',
+    ({ time, seconds, topRow, secondRow, thirdRow, fourthRow }) => {
+      beforeEach(() => {
+        berlinClock = new BerlinClock(time);
+      });
 
-    beforeEach(() => {
-      berlinClock = new BerlinClock(input);
-    });
+      test(`THEN getSeconds should return "${seconds}"`, () => {
+        expect(berlinClock.getSeconds()).toEqual(seconds);
+      });
 
-    test('THEN getSeconds should return "O"', () => {
-      expect(berlinClock.getSeconds()).toEqual('O');
-    });
+      test(`THEN getTopRow should return "${topRow}"`, () => {
+        expect(berlinClock.getTopRow()).toEqual(topRow);
+      });
 
-    test('THEN getTopRow should return "OOOO"', () => {
-      expect(berlinClock.getTopRow()).toEqual('OOOO');
-    });
+      test(`THEN getSecondRow should return "${secondRow}"`, () => {
+        expect(berlinClock.getSecondRow()).toEqual(secondRow);
+      });
 
-    test('THEN getSecondRow should return "OOOO"', () => {
-      expect(berlinClock.getSecondRow()).toEqual('OOOO');
-    });
+      test(`THEN getThirdRow should return "${thirdRow}"`, () => {
+        expect(berlinClock.getThirdRow()).toEqual(thirdRow);
+      });
 
-    test('THEN getThirdRow should return "OOOOOOOOOOO"', () => {
-      expect(berlinClock.getThirdRow()).toEqual('OOOOOOOOOOO');
-    });
-
-    test('THEN getFourthRow should return "OOOO"', () => {
-      expect(berlinClock.getFourthRow()).toEqual('OOOO');
-    });
-  });
+      test(`THEN getFourthRow should return "${fourthRow}"`, () => {
+        expect(berlinClock.getFourthRow()).toEqual(fourthRow);
+      });
+    },
+  );
 });

@@ -21,7 +21,7 @@ When(/^I send (.*) to the time route$/, async (time) => {
     .set({
       Accept: 'application/json',
     })
-    .send(time);
+    .send({ time });
 });
 
 Then(/^the response should include seconds set to (.*)$/, (seconds) => {

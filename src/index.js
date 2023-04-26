@@ -6,9 +6,10 @@ const app = express();
 app.use(express.json());
 
 app.get('/time', (req, res) => {
-  const berlinClock = new BerlinClock();
+  const { time } = req.body;
+  const berlinClock = new BerlinClock(time);
 
-  const time = {
+  const output = {
     seconds: berlinClock.getSeconds(),
     topRow: berlinClock.getTopRow(),
     secondRow: berlinClock.getSecondRow(),
@@ -16,7 +17,7 @@ app.get('/time', (req, res) => {
     fourthRow: berlinClock.getFourthRow(),
   };
 
-  res.status(200).send(time);
+  res.status(200).send(output);
 });
 
 module.exports = app;

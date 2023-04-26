@@ -1,6 +1,6 @@
 Feature: Berlin Clock
 
-Scenario Outline: time is 00:00:00
+Scenario Outline: time is <time>
     Given the BerlinClock API app
     When I send <time> to the time route
     Then the response should include seconds set to <seconds>
@@ -12,3 +12,4 @@ Scenario Outline: time is 00:00:00
     Examples:
     | time     | seconds | topRow | secondRow | thirdRow    | fourthRow |
     | 00:00:00 | O       | OOOO   | OOOO      | OOOOOOOOOOO | OOOO      |
+    | 00:00:01 | Y       | OOOO   | OOOO      | OOOOOOOOOOO | OOOO      |

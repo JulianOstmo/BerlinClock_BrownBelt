@@ -1,7 +1,12 @@
 /* eslint-disable class-methods-use-this */
 class BerlinClock {
+  constructor(time) {
+    const [, , seconds] = time.split(':');
+    this.seconds = seconds;
+  }
+
   getSeconds() {
-    return 'O';
+    return this.seconds % 2 === 0 ? 'O' : 'Y';
   }
 
   getTopRow() {
