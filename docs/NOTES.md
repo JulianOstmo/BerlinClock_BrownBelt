@@ -57,3 +57,7 @@
 - when time is "00:02:00", fourthRow should be "YYOO" ✅
 - when time is "00:03:00", fourthRow should be "YYYO" ✅
 - when time is "00:04:00", fourthRow should be "YYYY" ✅
+
+# Pomodoro 10
+
+- split BerlinClock class into smaller classes
