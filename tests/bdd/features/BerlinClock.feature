@@ -13,3 +13,6 @@ Scenario Outline: time is <time>
     | time     | seconds | topRow | secondRow | thirdRow    | fourthRow |
     | 00:00:00 | O       | OOOO   | OOOO      | OOOOOOOOOOO | OOOO      |
     | 00:00:01 | Y       | OOOO   | OOOO      | OOOOOOOOOOO | OOOO      |
+    | 00:00:59 | Y       | OOOO   | OOOO      | OOOOOOOOOOO | OOOO      |
+    | 00:01:00 | O       | OOOO   | OOOO      | OOOOOOOOOOO | YOOO      |
+    | 00:04:00 | O       | OOOO   | OOOO      | OOOOOOOOOOO | YYYY      |

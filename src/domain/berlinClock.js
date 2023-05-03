@@ -1,12 +1,23 @@
 /* eslint-disable class-methods-use-this */
+
+const OFF = 'O';
+const YELLOW = 'Y';
+
+const isEven = (value) => value % 2 === 0;
+
 class BerlinClock {
   constructor(time) {
-    const [, , seconds] = time.split(':');
+    const [, minutes, seconds] = time.split(':');
     this.seconds = seconds;
+    this.minutes = minutes;
   }
 
   getSeconds() {
-    return this.seconds % 2 === 0 ? 'O' : 'Y';
+    if (isEven(this.seconds)) {
+      return OFF;
+    }
+
+    return YELLOW;
   }
 
   getTopRow() {
@@ -22,7 +33,11 @@ class BerlinClock {
   }
 
   getFourthRow() {
-    return 'OOOO';
+    const totalLights = 4;
+    const totalYellowLights = this.minutes % 5;
+    const yellows = YELLOW.repeat(totalYellowLights);
+    const offs = OFF.repeat(totalLights - totalYellowLights);
+    return yellows + offs;
   }
 }
 
