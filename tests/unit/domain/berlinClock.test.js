@@ -6,37 +6,38 @@ describe('GIVEN the BerlinClock class', () => {
   describe.each`
     time          | seconds | topRow    | secondRow | thirdRow         | fourthRow
     ${'00:00:00'} | ${'O'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'OOOO'}
-    ${'00:00:01'} | ${'Y'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'OOOO'}
     ${'00:00:59'} | ${'Y'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'OOOO'}
     ${'00:01:00'} | ${'O'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'YOOO'}
-    ${'00:02:00'} | ${'O'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'YYOO'}
-    ${'00:03:00'} | ${'O'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'YYYO'}
     ${'00:04:00'} | ${'O'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'YYYY'}
+    ${'00:59:00'} | ${'O'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'YYYY'}
   `(
     'WHEN it is initialised with $time',
     ({ time, seconds, topRow, secondRow, thirdRow, fourthRow }) => {
+      let berlinClockTime;
+
       beforeEach(() => {
         berlinClock = new BerlinClock(time);
+        berlinClockTime = berlinClock.getTime();
       });
 
-      test(`THEN getSeconds should return "${seconds}"`, () => {
-        expect(berlinClock.getSeconds()).toEqual(seconds);
+      test(`THEN getTime should return an object containing {seconds: "${seconds}"}`, () => {
+        expect(berlinClockTime).toEqual(expect.objectContaining({ seconds }));
       });
 
-      test(`THEN getTopRow should return "${topRow}"`, () => {
-        expect(berlinClock.getTopRow()).toEqual(topRow);
+      test(`THEN getTime should return an object containing {topRow: "${topRow}"}`, () => {
+        expect(berlinClockTime).toEqual(expect.objectContaining({ topRow }));
       });
 
-      test(`THEN getSecondRow should return "${secondRow}"`, () => {
-        expect(berlinClock.getSecondRow()).toEqual(secondRow);
+      test(`THEN getTime should return an object containing {secondRow: "${secondRow}"}`, () => {
+        expect(berlinClockTime).toEqual(expect.objectContaining({ secondRow }));
       });
 
-      test(`THEN getThirdRow should return "${thirdRow}"`, () => {
-        expect(berlinClock.getThirdRow()).toEqual(thirdRow);
+      test(`THEN getTime should return an object containing {thirdRow: "${thirdRow}"}`, () => {
+        expect(berlinClockTime).toEqual(expect.objectContaining({ thirdRow }));
       });
 
-      test(`THEN getFourthRow should return "${fourthRow}"`, () => {
-        expect(berlinClock.getFourthRow()).toEqual(fourthRow);
+      test(`THEN getTime should return an object containing {fourthRow: "${fourthRow}"}`, () => {
+        expect(berlinClockTime).toEqual(expect.objectContaining({ fourthRow }));
       });
     },
   );

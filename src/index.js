@@ -9,13 +9,7 @@ app.get('/time', (req, res) => {
   const { time } = req.body;
   const berlinClock = new BerlinClock(time);
 
-  const output = {
-    seconds: berlinClock.getSeconds(),
-    topRow: berlinClock.getTopRow(),
-    secondRow: berlinClock.getSecondRow(),
-    thirdRow: berlinClock.getThirdRow(),
-    fourthRow: berlinClock.getFourthRow(),
-  };
+  const output = berlinClock.getTime();
 
   res.status(200).send(output);
 });

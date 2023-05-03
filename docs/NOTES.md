@@ -60,4 +60,4 @@
 
 # Pomodoro 10
 
-- split BerlinClock class into smaller classes
+- split BerlinClock class into smaller classes ✅
