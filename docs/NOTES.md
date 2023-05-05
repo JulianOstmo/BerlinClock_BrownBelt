@@ -61,3 +61,14 @@
 # Pomodoro 10
 
 - split BerlinClock class into smaller classes ✅
+
+# Pomodoro 11
+
+- create thirdRow class and logic
+  - 00:00:00 - OOOOOOOOOOO ✅
+  - 00:05:00 - YOOOOOOOOOO ✅
+  - 00:10:00 - YYOOOOOOOOO
+  - 00:15:00 - YYROOOOOOOO
+  - 00:30:00 - YYRYYROOOOO
+  - 00:45:00 - YYRYYRYYROO
+  - 00:55:00 - YYRYYRYYRYY

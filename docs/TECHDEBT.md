@@ -1,3 +1,2 @@
-- eslint disable in BerlinClock
 - need an E2E test to check for a 200 response status when hitting `/time`
 - BerlinClock class should only have a `getTime()` method

@@ -1,6 +1,6 @@
-/* eslint-disable class-methods-use-this */
 const FourthRow = require('./fourthRow');
 const Seconds = require('./seconds');
+const ThirdRow = require('./thirdRow');
 
 class BerlinClock {
   constructor(time) {
@@ -12,11 +12,13 @@ class BerlinClock {
   getTime() {
     const seconds = new Seconds(this.seconds).getSeconds();
     const fourthRow = new FourthRow(this.minutes).getFourthRow();
+    const thirdRow = new ThirdRow(this.minutes).getThirdRow();
+
     return {
       seconds,
       topRow: 'OOOO',
       secondRow: 'OOOO',
-      thirdRow: 'OOOOOOOOOOO',
+      thirdRow,
       fourthRow,
     };
   }

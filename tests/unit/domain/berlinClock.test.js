@@ -9,6 +9,7 @@ describe('GIVEN the BerlinClock class', () => {
     ${'00:00:59'} | ${'Y'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'OOOO'}
     ${'00:01:00'} | ${'O'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'YOOO'}
     ${'00:04:00'} | ${'O'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'YYYY'}
+    ${'00:05:00'} | ${'O'}  | ${'OOOO'} | ${'OOOO'} | ${'YOOOOOOOOOO'} | ${'OOOO'}
     ${'00:59:00'} | ${'O'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'YYYY'}
   `(
     'WHEN it is initialised with $time',
