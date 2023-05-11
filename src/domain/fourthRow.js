@@ -1,9 +1,17 @@
+const Light = require('./light');
+
 const OFF = 'O';
 const YELLOW = 'Y';
 
 class FourthRow {
   constructor(minutes) {
     this.minutes = minutes;
+    this.lights = [
+      new Light(YELLOW),
+      new Light(YELLOW),
+      new Light(YELLOW),
+      new Light(YELLOW),
+    ];
   }
 
   getFourthRow() {

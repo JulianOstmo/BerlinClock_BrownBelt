@@ -1,19 +1,21 @@
-const OFF = 'O';
+const Light = require('./light');
+
 const YELLOW = 'Y';
 
-const isEven = (value) => value % 2 === 0;
+const isOdd = (value) => value % 2 !== 0;
 
 class Seconds {
   constructor(seconds) {
     this.seconds = seconds;
+    this.light = new Light(YELLOW);
   }
 
   getSeconds() {
-    if (isEven(this.seconds)) {
-      return OFF;
+    if (isOdd(this.seconds)) {
+      this.light.turnOn();
     }
 
-    return YELLOW;
+    return this.light.getValue();
   }
 }
 

@@ -67,8 +67,30 @@
 - create thirdRow class and logic
   - 00:00:00 - OOOOOOOOOOO ✅
   - 00:05:00 - YOOOOOOOOOO ✅
-  - 00:10:00 - YYOOOOOOOOO
+  - 00:10:00 - YYOOOOOOOOO ✅ - refactor needed
   - 00:15:00 - YYROOOOOOOO
   - 00:30:00 - YYRYYROOOOO
   - 00:45:00 - YYRYYRYYROO
   - 00:55:00 - YYRYYRYYRYY
+
+# Pomodoro 12
+
+- create thirdRow class and logic
+  - 00:10:00 - YYOOOOOOOOO ✅ - refactor needed ✅
+  - 00:15:00 - YYROOOOOOOO ✅
+  - 00:30:00 - YYRYYROOOOO ✅
+  - 00:45:00 - YYRYYRYYROO ✅
+  - 00:55:00 - YYRYYRYYRYY ✅
+
+# Pomodoro 13
+
+- create a Light class to represent the Y/R/O 🚧
+  - refactor seconds to use Light class ✅
+  - refactor fourthRow to use Light class 🚧
+  - refactor thirdRow to use Light class
+- create secondRow class and logic
+  - 01:00:00 - YOOO
+  - 02:00:00 - YYOO
+  - 03:00:00 - YYYO
+  - 04:00:00 - YYYY
+  - 23:00:00 - YYYO
