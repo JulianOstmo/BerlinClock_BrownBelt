@@ -1,6 +1,5 @@
 const Light = require('./light');
 
-const OFF = 'O';
 const YELLOW = 'Y';
 
 class FourthRow {
@@ -15,11 +14,15 @@ class FourthRow {
   }
 
   getFourthRow() {
-    const totalLights = 4;
-    const totalYellowLights = this.minutes % 5;
-    const yellows = YELLOW.repeat(totalYellowLights);
-    const offs = OFF.repeat(totalLights - totalYellowLights);
-    return yellows + offs;
+    const totalOnLights = this.minutes % 5;
+
+    this.lights.forEach((light, count) => {
+      if (count + 1 <= totalOnLights) {
+        light.turnOn();
+      }
+    });
+
+    return this.lights.map((light) => light.getValue()).join('');
   }
 }
 

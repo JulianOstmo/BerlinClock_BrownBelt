@@ -94,3 +94,14 @@
   - 03:00:00 - YYYO
   - 04:00:00 - YYYY
   - 23:00:00 - YYYO
+
+# Pomodoro 14
+
+- refactor fourthRow to use Light class ✅
+- refactor thirdRow to use Light class 🚧
+- create secondRow class and logic
+  - 01:00:00 - YOOO
+  - 02:00:00 - YYOO
+  - 03:00:00 - YYYO
+  - 04:00:00 - YYYY
+  - 23:00:00 - YYYO
