@@ -25,6 +25,22 @@ RROO
 YYRYYRYYRYY
 YOOO
 
+## Entities
+
+- BerlinClock
+  - Seconds
+    - Row
+  - TopRow
+    - Row
+  - SecondRow
+    - Row
+  - ThirdRow
+    - Row
+  - FourthRow
+- Row
+  - Lights (Array<Light>)
+- Light
+
 To get started, in short:
 Run `npm ci` and then `npm start`.
 

@@ -1,2 +1,1 @@
 - need an E2E test to check for a 200 response status when hitting `/time`
-- consider creating a Row class (that consists of Lights)

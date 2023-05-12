@@ -1,28 +1,24 @@
 const Light = require('./light');
+const Row = require('./row');
 
 const YELLOW = 'Y';
 
 class FourthRow {
   constructor(minutes) {
     this.minutes = minutes;
-    this.lights = [
+    this.row = new Row([
       new Light(YELLOW),
       new Light(YELLOW),
       new Light(YELLOW),
       new Light(YELLOW),
-    ];
+    ]);
+
+    const totalLightsOn = this.minutes % 5;
+    this.row.turnOnLights(totalLightsOn);
   }
 
   getFourthRow() {
-    const totalOnLights = this.minutes % 5;
-
-    this.lights.forEach((light, count) => {
-      if (count + 1 <= totalOnLights) {
-        light.turnOn();
-      }
-    });
-
-    return this.lights.map((light) => light.getValue()).join('');
+    return this.row.getValue();
   }
 }
 
