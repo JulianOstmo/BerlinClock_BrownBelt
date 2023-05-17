@@ -2,6 +2,7 @@ const FourthRow = require('./fourthRow');
 const SecondRow = require('./secondRow');
 const Seconds = require('./seconds');
 const ThirdRow = require('./thirdRow');
+const TopRow = require('./topRow');
 
 class BerlinClock {
   constructor(time) {
@@ -13,13 +14,14 @@ class BerlinClock {
 
   getTime() {
     const seconds = new Seconds(this.seconds).getSeconds();
-    const fourthRow = new FourthRow(this.minutes).getFourthRow();
-    const thirdRow = new ThirdRow(this.minutes).getThirdRow();
+    const topRow = new TopRow(this.hours).getTopRow();
     const secondRow = new SecondRow(this.hours).getSecondRow();
+    const thirdRow = new ThirdRow(this.minutes).getThirdRow();
+    const fourthRow = new FourthRow(this.minutes).getFourthRow();
 
     return {
       seconds,
-      topRow: 'OOOO',
+      topRow,
       secondRow,
       thirdRow,
       fourthRow,

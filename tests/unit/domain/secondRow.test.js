@@ -1,6 +1,6 @@
 const SecondRow = require('../../../src/domain/secondRow');
 
-describe('GIVEN the secondRow class', () => {
+describe('GIVEN the SecondRow class', () => {
   let secondRow;
 
   describe.each`

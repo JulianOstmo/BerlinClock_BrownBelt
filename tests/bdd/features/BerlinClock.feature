@@ -19,3 +19,4 @@ Scenario Outline: time is <time>
     | 00:05:00 | O       | OOOO   | OOOO      | YOOOOOOOOOO | OOOO      |
     | 00:55:00 | O       | OOOO   | OOOO      | YYRYYRYYRYY | OOOO      |
     | 04:00:00 | O       | OOOO   | YYYY      | OOOOOOOOOOO | OOOO      |
+    | 23:59:59 | Y       | YYYY   | YYYO      | YYRYYRYYRYY | YYYY      |

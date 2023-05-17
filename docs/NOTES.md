@@ -122,5 +122,13 @@
   - 03:00:00 - YYYO ✅
   - 04:00:00 - YYYY ✅
   - 23:00:00 - YYYO ✅
+
+# Pomodoro 17
+
 - create topRow class and logic
-  - 23:00:00 - YYYO
+  - 00:00:00 - OOOO ✅
+  - 01:00:00 - YOOO ✅
+  - 02:00:00 - YYOO ✅
+  - 03:00:00 - YYYO ✅
+  - 04:00:00 - YYYY ✅
+  - 23:00:00 - YYYO ✅
