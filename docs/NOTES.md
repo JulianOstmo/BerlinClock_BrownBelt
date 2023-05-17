@@ -112,9 +112,15 @@
 - create a Row class (that consists of Lights) ✅
 - refactor fourthRow to use Row class ✅
 - refactor thirdRow to use Row class ✅
+
+# Pomodoro 16
+
 - create secondRow class and logic
-  - 01:00:00 - YOOO
-  - 02:00:00 - YYOO
-  - 03:00:00 - YYYO
-  - 04:00:00 - YYYY
+  - 00:00:00 - OOOO ✅
+  - 01:00:00 - YOOO ✅
+  - 02:00:00 - YYOO ✅
+  - 03:00:00 - YYYO ✅
+  - 04:00:00 - YYYY ✅
+  - 23:00:00 - YYYO ✅
+- create topRow class and logic
   - 23:00:00 - YYYO

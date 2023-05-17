@@ -11,6 +11,7 @@ describe('GIVEN the BerlinClock class', () => {
     ${'00:04:00'} | ${'O'}  | ${'OOOO'} | ${'OOOO'} | ${'OOOOOOOOOOO'} | ${'YYYY'}
     ${'00:05:00'} | ${'O'}  | ${'OOOO'} | ${'OOOO'} | ${'YOOOOOOOOOO'} | ${'OOOO'}
     ${'00:59:00'} | ${'O'}  | ${'OOOO'} | ${'OOOO'} | ${'YYRYYRYYRYY'} | ${'YYYY'}
+    ${'04:00:00'} | ${'O'}  | ${'OOOO'} | ${'YYYY'} | ${'OOOOOOOOOOO'} | ${'OOOO'}
   `(
     'WHEN it is initialised with $time',
     ({ time, seconds, topRow, secondRow, thirdRow, fourthRow }) => {
