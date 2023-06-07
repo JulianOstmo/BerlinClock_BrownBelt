@@ -1,3 +1,5 @@
+[![Node.js CI](https://github.com/JulianOstmo/BerlinClock_BrownBelt/actions/workflows/pipeline.yml/badge.svg)](https://github.com/JulianOstmo/BerlinClock_BrownBelt/actions/workflows/pipeline.yml)
+
 # BerlinClock_JulianOstmo
 
 BerlinClock kata (Blue belt practice)
