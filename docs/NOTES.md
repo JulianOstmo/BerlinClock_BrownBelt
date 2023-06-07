@@ -133,12 +133,20 @@
   - 04:00:00 - YYYY ✅
   - 23:00:00 - YYYO ✅
 
+# Pomodoro 18
+
+- Move to external Github ✅
+- Update Dockerfile to use Node v18 ✅
+- Setup Github Actions 🚧
+  - Run ESlint, Prettier, Detect Secrets ✅
+  - Run Unit and Integration tests ✅
+  - Run Snyk 🚧
+  - SonarCloud
+
 # TODO:
 
-- Setup Travis
-- Determine where to host app
-- Update Dockerfile to use Node v18
-- Check Travis script is correct
+- Remove old Travis stuff
 - E2E testing? Maybe run app in Docker and test API
 - CD
 - CLI
+- Determine where to host app

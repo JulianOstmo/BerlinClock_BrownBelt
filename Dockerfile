@@ -1,4 +1,4 @@
-FROM node:14 as BUILD
+FROM node:18 as BUILD
 
 WORKDIR /usr/src/app
 
@@ -8,7 +8,7 @@ RUN curl -sf https://gobinaries.com/tj/node-prune | sh
 COPY package*.json ./
 
 # Locally we will run it using
-RUN npm ci --only=production --ignore-scripts
+RUN npm ci --omit=dev --ignore-scripts
 
 # Prune the source code.
 RUN npm prune --production
@@ -17,7 +17,7 @@ RUN node-prune
 COPY . .
 
 # Build final image using small base image.
-FROM node:14-alpine
+FROM node:18-alpine
 
 WORKDIR /usr/src/app
 
