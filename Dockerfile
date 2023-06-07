@@ -3,7 +3,7 @@ FROM node:14 as BUILD
 WORKDIR /usr/src/app
 
 # Add pruning packages for use later.
-RUN curl -sfL https://install.goreleaser.com/github.com/tj/node-prune.sh | bash -s -- -b /usr/local/bin
+RUN curl -sf https://gobinaries.com/tj/node-prune | sh
 
 COPY package*.json ./
 
@@ -12,7 +12,7 @@ RUN npm ci --only=production --ignore-scripts
 
 # Prune the source code.
 RUN npm prune --production
-RUN /usr/local/bin/node-prune
+RUN node-prune
 
 COPY . .
 

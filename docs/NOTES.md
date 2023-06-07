@@ -132,3 +132,13 @@
   - 03:00:00 - YYYO ✅
   - 04:00:00 - YYYY ✅
   - 23:00:00 - YYYO ✅
+
+# TODO:
+
+- Setup Travis
+- Determine where to host app
+- Update Dockerfile to use Node v18
+- Check Travis script is correct
+- E2E testing? Maybe run app in Docker and test API
+- CD
+- CLI

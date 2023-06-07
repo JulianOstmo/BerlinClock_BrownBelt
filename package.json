@@ -37,7 +37,8 @@
     "lint-staged": "^10.5.4",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
-    "supertest": "^6.1.3"
+    "supertest": "^6.1.3",
+    "typescript": "^5.0.4"
   },
   "scripts": {
     "detect-secrets": "cross-env-shell docker run --platform linux/amd64 --rm -v ${INIT_CWD}:/code icr.io/git-defenders/detect-secrets-hook:0.13.1.ibm.56.dss --baseline .secrets.baseline",
@@ -79,6 +80,6 @@
   "author": "",
   "license": "cio-london",
   "engines": {
-    "node": "14.17.4"
+    "node": "18.16.0"
   }
 }
