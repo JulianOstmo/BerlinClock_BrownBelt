@@ -113,3 +113,6 @@ dist
 
 # vsCode local settings
 .vscode/settings.json
+
+# SonarCloud
+.scannerwork
