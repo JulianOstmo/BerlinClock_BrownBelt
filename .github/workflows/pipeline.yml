@@ -4,8 +4,13 @@
 name: Node.js CI
 
 env:
-  # PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
   IBMCLOUD_APIKEY: ${{ secrets.IBMCLOUD_APIKEY }}
+  IBM_CLOUD_REGION: us-south
+  REGISTRY_HOSTNAME: us.icr.io
+  ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
+  IMAGE_NAME: berlinclock_julianostmo
+  GITHUB_SHA: ${{ github.sha }}
+  # PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
   # REGISTRY_SECRET: ${{ secrets.REGISTRY_SECRET }}
   # APP_HOST: ${{ vars.APP_HOST }}
 
@@ -84,6 +89,42 @@ jobs:
       - run: npm test
       - run: sonar-scanner
           -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    needs: [test_and_coverage]
+    steps:
+      - name: Checkout
+        uses: actions/checkout
+
+      # Download and Install IBM Cloud CLI
+      - name: Install IBM Cloud CLI
+        run: |
+          curl -fsSL https://clis.cloud.ibm.com/install/linux | sh
+          ibmcloud --version
+          ibmcloud config --check-version=false
+          ibmcloud plugin install -f kubernetes-service
+          ibmcloud plugin install -f container-registry
+
+      # Authenticate with IBM Cloud CLI
+      - name: Authenticate with IBM Cloud CLI
+        run: |
+          ibmcloud login --apikey "${IBMCLOUD_APIKEY}" -r "${IBM_CLOUD_REGION}" -g default
+          ibmcloud cr region-set "${IBM_CLOUD_REGION}"
+          ibmcloud cr login
+
+      # Build the Docker image
+      - name: Build with Docker
+        run: |
+          docker build -t "$REGISTRY_HOSTNAME"/"$ICR_NAMESPACE"/"$IMAGE_NAME":"$GITHUB_SHA" \
+            --build-arg GITHUB_SHA="$GITHUB_SHA" \
+            --build-arg GITHUB_REF="$GITHUB_REF" .
+
+      # Push the image to IBM Container Registry
+      - name: Push the image to ICR
+        run: |
+          docker push $REGISTRY_HOSTNAME/$ICR_NAMESPACE/$IMAGE_NAME:$GITHUB_SHA
 
   # pact_test:
   #   runs-on: ubuntu-latest

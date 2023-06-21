@@ -4,14 +4,16 @@
 set -o pipefail
 set -e
 
-APP_NAME=microservice-template
+APP_NAME=berlinclock_julianostmo
 CONFIG_FILE_PATH="./scripts/config/global.sh"
 
 # Include variables:
-## IBMCLOUD_API
-## IBMCLOUD_APIKEY
-## IBMCLOUD_RESOURCE_GROUP
-## REGISTRY_TAGS_AND_NAMESPACES
+# IBMCLOUD_API
+# IBMCLOUD_RESOURCE_GROUP
+# REGISTRY_URL
+# REGION
+# REGISTRY_TAGS_AND_NAMESPACES
+# IBMCLOUD_APIKEY
 source $CONFIG_FILE_PATH
 
 echo "Starting build for: $APP_NAME";
@@ -31,22 +33,19 @@ else
 fi
 
 # Check if DOCKERHUB_USERNAME and DOCKERHUB_PASSWORD variables are provided
-if [[ -z "${DOCKERHUB_USERNAME}" ]] || [[ -z "${DOCKERHUB_PASSWORD}" ]]; then
-    echo 'No DOCKERHUB_USERNAME or DOCKERHUB_PASSWORD provided'
-    exit 1
-fi
+# if [[ -z "${DOCKERHUB_USERNAME}" ]] || [[ -z "${DOCKERHUB_PASSWORD}" ]]; then
+#     echo 'No DOCKERHUB_USERNAME or DOCKERHUB_PASSWORD provided'
+#     exit 1
+# fi
 
 # Login into DockerHub
-echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+# echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
 
 echo "Build image: ${APP_NAME}:${IMAGE_TAG}"
 docker build . -t "${APP_NAME}:${IMAGE_TAG}"
 
 echo "Login on IBM Cloud"
 ibmcloud login -a $IBMCLOUD_API --apikey $IBMCLOUD_APIKEY --no-region
-
-REGION="us-south"
-REGISTRY_URL="us.icr.io"
 
 echo "Target IBM Cloud region '${REGION}' for resource group '${IBMCLOUD_RESOURCE_GROUP}'"
 ibmcloud target -r $REGION -g $IBMCLOUD_RESOURCE_GROUP
@@ -69,6 +68,6 @@ do
 done
 # end foreach
 
-docker logout
+# docker logout
 
 echo "Build and Save succesfully finished for ${APP_NAME}"
