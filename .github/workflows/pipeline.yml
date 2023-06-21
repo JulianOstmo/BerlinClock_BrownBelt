@@ -4,8 +4,9 @@
 name: Node.js CI
 
 env:
-  IBMCLOUD_APIKEY: ${{ secrets.IBMCLOUD_APIKEY }}
+  IBM_CLOUD_APIKEY: ${{ secrets.IBMCLOUD_APIKEY }}
   IBM_CLOUD_REGION: us-south
+  IBM_CLOUD_RESOURCE_GROUP: Default
   REGISTRY_HOSTNAME: us.icr.io
   ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
   IMAGE_NAME: berlinclock_julianostmo
@@ -93,7 +94,7 @@ jobs:
   build-and-deploy:
     name: Build and Deploy
     runs-on: ubuntu-latest
-    needs: [test_and_coverage]
+    needs: [test_and_coverage, snyk_test]
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -110,7 +111,7 @@ jobs:
       # Authenticate with IBM Cloud CLI
       - name: Authenticate with IBM Cloud CLI
         run: |
-          ibmcloud login --apikey "${IBMCLOUD_APIKEY}" -r "${IBM_CLOUD_REGION}" -g default
+          ibmcloud login --apikey "${IBM_CLOUD_APIKEY}" -r "${IBM_CLOUD_REGION}" -g "${IBM_CLOUD_RESOURCE_GROUP}"
           ibmcloud cr region-set "${IBM_CLOUD_REGION}"
           ibmcloud cr login
 
