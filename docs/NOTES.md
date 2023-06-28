@@ -146,8 +146,18 @@
 # Pomodoro 19
 
 - CB:
-  - setup container registry on IBM Cloud 🚧
-  - build and push to container registry
+  - add build and push steps to pipeline.yml ✅
+  - add deployment steps to pipeline.yml
+
+# Pomodoro 20
+
+- CB:
+  - add deployment steps to pipeline.yml 🚧
+
+# Pomodoro 21
+
+- CB:
+  - add deployment steps to pipeline.yml 🚧
 
 # TODO:
 
