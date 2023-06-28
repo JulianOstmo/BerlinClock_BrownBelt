@@ -1,7 +1,7 @@
 CLUSTER_NAME=xpfarm
 
 # Get K8 cluster ID
-IKS_CLUSTER_ID=$(ibmcloud ks cluster ls --output json | jq -c '.[] | select( .name == "$CLUSTER_NAME" )' | jq -c '.id')
+IKS_CLUSTER_ID=$(ibmcloud ks cluster ls --output json | jq -c '.[] | select( .name == "'$CLUSTER_NAME'" )' | jq -c '.id')
 
 if [ -z "$IKS_CLUSTER_ID" ]; then
     # Create K8 cluster (free tier)
