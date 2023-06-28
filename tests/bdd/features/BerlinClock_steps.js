@@ -17,7 +17,7 @@ Given('the BerlinClock API app', () => {
 
 When(/^I send (.*) to the time route$/, async (time) => {
   response = await berlinClock
-    .get(`/time`)
+    .post(`/time`)
     .set({
       Accept: 'application/json',
     })

@@ -57,8 +57,10 @@
     "start:dev": "cross-env NODE_ENV=development nodemon index",
     "test": "cross-env NODE_ENV=test npm run lint:verify && npm run test:coverage",
     "test:coverage": "cross-env NODE_ENV=test jest ./tests --collectCoverage",
-    "test:bdd": "cross-env NODE_ENV=test jest ./features",
+    "test:bdd": "cross-env NODE_ENV=test jest ./tests/bdd",
     "test:bdd:watch": " cross-env NODE_ENV=test npm run test:bdd -- --watch",
+    "test:e2e": "cross-env NODE_ENV=test jest ./tests/e2e --coverage false",
+    "test:e2e:watch": " cross-env NODE_ENV=test npm run test:e2e -- --watch",
     "test:unit": "cross-env NODE_ENV=test jest ./tests/unit",
     "test:unit:watch": "cross-env NODE_ENV=test npm run test:unit -- --watch"
   },

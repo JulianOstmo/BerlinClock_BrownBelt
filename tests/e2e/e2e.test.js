@@ -9,7 +9,7 @@ describe('GIVEN the API endpoint "/time"', () => {
 
     beforeAll(async () => {
       response = await request(app)
-        .get(`/time`)
+        .post(`/time`)
         .set({
           Accept: 'application/json',
         })
@@ -18,6 +18,16 @@ describe('GIVEN the API endpoint "/time"', () => {
 
     test('THEN a response status of 200 should be returned', () => {
       expect(response.status).toEqual(200);
+    });
+
+    test('THEN a response containing a BerlinClock output should be returned', () => {
+      expect(response.body).toEqual({
+        seconds: 'O',
+        topRow: 'OOOO',
+        secondRow: 'OOOO',
+        thirdRow: 'OOOOOOOOOOO',
+        fourthRow: 'OOOO',
+      });
     });
   });
 });

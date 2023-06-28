@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/time', (req, res) => {
+app.post('/time', (req, res) => {
   const { time } = req.body;
   const berlinClock = new BerlinClock(time);
 
