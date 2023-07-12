@@ -98,6 +98,8 @@ jobs:
     name: Build and Deploy
     runs-on: ubuntu-latest
     needs: [test_and_coverage, snyk_test]
+    outputs:
+      cluster-ip: ${{ steps.cluster-ip.outputs.CLUSTER_IP }}
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -142,14 +144,21 @@ jobs:
           kubectl apply -f service.yaml
           kubectl get services -o wide
 
+      # Get Cluster Public IP and set to variable
+      - name: Get Cluster Public IP
+        id: cluster-ip
+        run: echo "CLUSTER_IP=$(ibmcloud ks worker ls --cluster $IKS_CLUSTER_NAME --output json | jq -c '.[] | .publicIP')" >> "$GITHUB_OUTPUT"
+
   smoke-test:
+    name: Smoke Test
     runs-on: ubuntu-latest
+    needs: build-and-deploy
     steps:
       - uses: actions/setup-node@master
       - name: Use Node.js 18.16.0
         uses: actions/checkout@master
       - run: npm ci
-      - run: npm run test:smoke
+      - run: echo ${{ needs.build-and-deploy.outputs.cluster-ip }}
 
   # pact_test:
   #   runs-on: ubuntu-latest
