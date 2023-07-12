@@ -100,6 +100,7 @@ jobs:
     needs: [test_and_coverage, snyk_test]
     outputs:
       cluster-ip: ${{ steps.cluster-ip.outputs.CLUSTER_IP }}
+      app-nodeport: ${{ steps.app-nodeport.outputs.APP_NODEPORT }}
     steps:
       - name: Checkout
         uses: actions/checkout@master
@@ -147,7 +148,14 @@ jobs:
       # Get Cluster Public IP and set to variable
       - name: Get Cluster Public IP
         id: cluster-ip
-        run: echo "CLUSTER_IP=$(ibmcloud ks worker ls --cluster $IKS_CLUSTER_NAME --output json | jq -c '.[] | .publicIP')" >> "$GITHUB_OUTPUT"
+        run: |
+          echo "CLUSTER_IP=$(ibmcloud ks worker ls --cluster $IKS_CLUSTER_NAME --output json | jq -c '.[] | .publicIP')" >> "$GITHUB_OUTPUT"
+
+      # Get Test app NodePort and set to variable
+      - name: Get Test App NodePort
+        id: app-nodeport
+        run: |
+          echo "APP_NODEPORT=$(kubectl describe service berlinclock | grep -i nodeport: | sed -r 's/.* ([0-9]+)\/TCP.*/\1/')" >> "$GITHUB_OUTPUT"
 
   smoke-test:
     name: Smoke Test
@@ -159,6 +167,7 @@ jobs:
         uses: actions/checkout@master
       - run: npm ci
       - run: echo ${{ needs.build-and-deploy.outputs.cluster-ip }}
+      - run: echo ${{ needs.build-and-deploy.outputs.app-nodeport }}
 
   # pact_test:
   #   runs-on: ubuntu-latest
