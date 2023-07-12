@@ -166,8 +166,7 @@ jobs:
       - name: Use Node.js 18.16.0
         uses: actions/checkout@master
       - run: npm ci
-      - run: echo ${{ needs.build-and-deploy.outputs.cluster-ip }}
-      - run: echo ${{ needs.build-and-deploy.outputs.app-nodeport }}
+      - run: CLUSTER_IP=${{ needs.build-and-deploy.outputs.cluster-ip }} APP_NODEPORT=${{ needs.build-and-deploy.outputs.app-nodeport }} npm run test:smoke
 
   # pact_test:
   #   runs-on: ubuntu-latest

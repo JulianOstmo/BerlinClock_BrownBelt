@@ -170,10 +170,10 @@
 
 # Pomodoro 24
 
-- Update pipeline to deploy Test app 🚧
-  - Assign cluster IP to variable 🚧
-  - Assign Test App NodePort to variable
-- Add smoke test to pipeline and point it to Test app
+- Update pipeline to deploy Test app ✅
+  - Assign cluster IP to variable ✅
+  - Assign Test App NodePort to variable ✅
+- Add smoke test to pipeline and point it to Test app 🚧
 - Add step to pipeline to kill Test app (deployment & service)
 
 # TODO:

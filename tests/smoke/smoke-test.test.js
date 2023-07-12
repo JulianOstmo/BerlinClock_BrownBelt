@@ -1,7 +1,12 @@
+require('dotenv').config();
+const request = require('supertest');
+
+const clusterIP = process.env.CLUSTER_IP.trim();
+const port = process.env.APP_NODEPORT.trim();
+
 describe('API smoke test', () => {
-  it('BerlinClock API test', async ({ supertest }) => {
-    await supertest
-      .request('http://159.122.186.201:31647')
+  it('BerlinClock API test', async () => {
+    await request(`http://${clusterIP}:${port}`)
       .post('/time')
       .send({
         time: '23:59:59',
@@ -9,7 +14,7 @@ describe('API smoke test', () => {
       .expect(200)
       .expect('Content-Type', /json/)
       .then((response) => {
-        expect(response._body).to.include({
+        expect(response.body).toEqual({
           seconds: 'Y',
           topRow: 'YYYY',
           secondRow: 'YYYO',
