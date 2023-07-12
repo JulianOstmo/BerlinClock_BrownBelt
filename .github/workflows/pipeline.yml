@@ -131,7 +131,7 @@ jobs:
           docker push $REGISTRY_HOSTNAME/$ICR_NAMESPACE/$IMAGE_NAME:$GITHUB_SHA
 
       # Deploy the Docker image to the IKS cluster
-      - name: Deploy to IKS
+      - name: Deploy Test app to IKS
         run: |
           ibmcloud ks cluster config --cluster $IKS_CLUSTER_NAME
           kubectl config current-context
@@ -141,6 +141,15 @@ jobs:
           kubectl create service nodeport $DEPLOYMENT_NAME --tcp=32321:$PORT --dry-run=client -o yaml > service.yaml
           kubectl apply -f service.yaml
           kubectl get services -o wide
+
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@master
+      - name: Use Node.js 18.16.0
+        uses: actions/checkout@master
+      - run: npm ci
+      - run: npm run test:smoke
 
   # pact_test:
   #   runs-on: ubuntu-latest

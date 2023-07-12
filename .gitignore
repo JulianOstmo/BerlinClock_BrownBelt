@@ -116,3 +116,6 @@ dist
 
 # SonarCloud
 .scannerwork
+
+# Nightwatch
+tests_output

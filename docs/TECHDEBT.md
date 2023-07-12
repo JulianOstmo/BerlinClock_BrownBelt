@@ -1,2 +1,3 @@
 - need an E2E test to check for a 200 response status when hitting `/time`
 - finish script to create cluster and add it to Github Actions pipeline
+- publish Nightwatch test report to Github Pages
