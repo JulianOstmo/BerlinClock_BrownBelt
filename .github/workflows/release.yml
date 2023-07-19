@@ -10,7 +10,7 @@ env:
   REGISTRY_HOSTNAME: us.icr.io
   ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
   IMAGE_NAME: berlinclock_julianostmo
-  DEPLOYMENT_NAME: berlinclock_prod
+  DEPLOYMENT_NAME: berlinclock-prod
   GITHUB_SHA: ${{ github.sha }}
   PORT: 3443
 
