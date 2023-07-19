@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.ibm.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Node.js CI
+name: Test
 
 env:
   IBM_CLOUD_APIKEY: ${{ secrets.IBMCLOUD_APIKEY }}
@@ -11,12 +11,9 @@ env:
   REGISTRY_HOSTNAME: us.icr.io
   ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
   IMAGE_NAME: berlinclock_julianostmo
-  DEPLOYMENT_NAME: berlinclock
+  DEPLOYMENT_NAME: berlinclock_test
   GITHUB_SHA: ${{ github.sha }}
   PORT: 3443
-  # PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
-  # REGISTRY_SECRET: ${{ secrets.REGISTRY_SECRET }}
-  # APP_HOST: ${{ vars.APP_HOST }}
 
 on:
   push:
@@ -157,8 +154,8 @@ jobs:
         run: |
           echo "APP_NODEPORT=$(kubectl describe service berlinclock | grep -i nodeport: | sed -r 's/.* ([0-9]+)\/TCP.*/\1/')" >> "$GITHUB_OUTPUT"
 
-  smoke-test:
-    name: Smoke Test
+  integration-test:
+    name: Integration Test
     runs-on: ubuntu-latest
     needs: build-and-deploy
     steps:
@@ -167,70 +164,3 @@ jobs:
         uses: actions/checkout@master
       - run: npm ci
       - run: CLUSTER_IP=${{ needs.build-and-deploy.outputs.cluster-ip }} APP_NODEPORT=${{ needs.build-and-deploy.outputs.app-nodeport }} npm run test:smoke
-
-  # pact_test:
-  #   runs-on: ubuntu-latest
-  #   needs: [eslint-verify, prettier-verify]
-
-  #   steps:
-  #     - uses: actions/setup-node@master
-  #     - name: Run Pact tests
-  #       uses: actions/checkout@master
-  #     - run: touch .env
-  #     - run: npm ci
-  #     - run: npm run test:api:consumer
-  #     - run: npm run publish:pact
-  #     - run: export CI=true && npm run test:api:provider
-
-  # build_image:
-  #   runs-on: ubuntu-latest
-  #   needs: [pact_test, test_and_coverage, detect-secrets, commitlint, snyk_test]
-  #   steps:
-  #     - name: Build and Publish image
-  #       uses: actions/checkout@master
-  #     - run: touch .env
-  #     - run: ./scripts/buildAndPublish.sh
-
-  # deploy_image:
-  #   runs-on: ubuntu-latest
-  #   needs: [build_image]
-  #   steps:
-  #     - name: Deploy the images
-  #       uses: actions/checkout@master
-  #     - run: ./scripts/deploy.sh
-
-  # smoke_test:
-  #   runs-on: ubuntu-latest
-  #   needs: [deploy_image]
-  #   steps:
-  #     - uses: actions/setup-node@master
-  #     - name: Smoke test using pact tests
-  #       uses: actions/checkout@master
-  #     - run: touch .env
-  #     - run: npm ci
-  #     - run: export SMOKE_TEST=true && npm run test:api:provider -- --collectCoverage=false
-
-  # snyk_monitor:
-  #   runs-on: ubuntu-latest
-  #   needs: [deploy_image]
-
-  #   steps:
-  #     - uses: actions/checkout@master
-  #     - name: Use Node.js 18.16.0
-  #       uses: snyk/actions/node@master
-  #       env:
-  #         # In order to use the Snyk Action you will need to have a Snyk API token.
-  #         # More details in https://{{cookiecutter.github_url}}/snyk/actions#getting-your-snyk-token
-  #         # or you can signup for free at https://snyk.io/login
-  #         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-  #       with:
-  #         command: monitor
-
-  # prune_image:
-  #   name: Prune the old image
-  #   runs-on: ubuntu-latest
-  #   needs: [smoke_test]
-  #   steps:
-  #     - name: Run script to prune the old image
-  #       uses: actions/checkout@master
-  #     - run: ./scripts/prune_images.sh

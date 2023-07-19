@@ -1,0 +1,81 @@
+# This workflow will deploy the application to Production when a new release is published
+
+name: Release
+
+env:
+  IBM_CLOUD_APIKEY: ${{ secrets.IBMCLOUD_APIKEY }}
+  IBM_CLOUD_REGION: us-south
+  IBM_CLOUD_RESOURCE_GROUP: Default
+  IKS_CLUSTER_NAME: xpfarm
+  REGISTRY_HOSTNAME: us.icr.io
+  ICR_NAMESPACE: ${{ secrets.ICR_NAMESPACE }}
+  IMAGE_NAME: berlinclock_julianostmo
+  DEPLOYMENT_NAME: berlinclock_prod
+  GITHUB_SHA: ${{ github.sha }}
+  PORT: 3443
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    outputs:
+      cluster-ip: ${{ steps.cluster-ip.outputs.CLUSTER_IP }}
+      app-nodeport: ${{ steps.app-nodeport.outputs.APP_NODEPORT }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      # Download and Install IBM Cloud CLI
+      - name: Install IBM Cloud CLI
+        run: |
+          curl -fsSL https://clis.cloud.ibm.com/install/linux | sh
+          ibmcloud --version
+          ibmcloud config --check-version=false
+          ibmcloud plugin install -f kubernetes-service
+          ibmcloud plugin install -f container-registry
+
+      # Authenticate with IBM Cloud CLI
+      - name: Authenticate with IBM Cloud CLI
+        run: |
+          ibmcloud login --apikey "${IBM_CLOUD_APIKEY}" -r "${IBM_CLOUD_REGION}" -g "${IBM_CLOUD_RESOURCE_GROUP}"
+          ibmcloud cr region-set "${IBM_CLOUD_REGION}"
+          ibmcloud cr login
+
+      # Deploy the Docker image to the IKS cluster
+      - name: Deploy Test app to IKS
+        run: |
+          ibmcloud ks cluster config --cluster $IKS_CLUSTER_NAME
+          kubectl config current-context
+          kubectl create deployment $DEPLOYMENT_NAME --image=$REGISTRY_HOSTNAME/$ICR_NAMESPACE/$IMAGE_NAME:$GITHUB_SHA --dry-run -o yaml > deployment.yaml
+          kubectl apply -f deployment.yaml
+          kubectl rollout status deployment/$DEPLOYMENT_NAME
+          kubectl create service nodeport $DEPLOYMENT_NAME --tcp=32321:$PORT --dry-run=client -o yaml > service.yaml
+          kubectl apply -f service.yaml
+          kubectl get services -o wide
+
+      # Get Cluster Public IP and set to variable
+      - name: Get Cluster Public IP
+        id: cluster-ip
+        run: |
+          echo "CLUSTER_IP=$(ibmcloud ks worker ls --cluster $IKS_CLUSTER_NAME --output json | jq -c '.[] | .publicIP')" >> "$GITHUB_OUTPUT"
+
+      # Get Test app NodePort and set to variable
+      - name: Get Test App NodePort
+        id: app-nodeport
+        run: |
+          echo "APP_NODEPORT=$(kubectl describe service berlinclock | grep -i nodeport: | sed -r 's/.* ([0-9]+)\/TCP.*/\1/')" >> "$GITHUB_OUTPUT"
+
+  smoke-test:
+    name: Smoke Test
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - uses: actions/setup-node@master
+      - name: Use Node.js 18.16.0
+        uses: actions/checkout@master
+      - run: npm ci
+      - run: CLUSTER_IP=${{ needs.build-and-deploy.outputs.cluster-ip }} APP_NODEPORT=${{ needs.build-and-deploy.outputs.app-nodeport }} npm run test:smoke
